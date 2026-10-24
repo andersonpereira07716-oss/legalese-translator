@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ShieldAlert, FileText, Zap, CheckCircle, Lock, ExternalLink, History, RefreshCw, Layers } from 'lucide-react';
+import { ShieldAlert, FileText, Zap, Lock, ExternalLink, History, RefreshCw, Layers, LayoutGrid } from 'lucide-react';
 
 export default function App() {
   const [contractText, setContractText] = useState('');
@@ -7,6 +7,7 @@ export default function App() {
   const [analysis, setAnalysis] = useState(null);
   const [history, setHistory] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
+  const [showNavMenu, setShowNavMenu] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem('legalese_history');
@@ -72,16 +73,25 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans pb-12 antialiased selection:bg-cyan-500 selection:text-slate-950">
       
-      {/* HEADER LIMPO E RESPONSIVO */}
+      {/* HEADER DE NAVEGAÇÃO ECOSSISTEMA */}
       <header className="border-b border-slate-800/80 bg-slate-900/70 backdrop-blur-md sticky top-0 z-50 px-4 py-3">
         <div className="max-w-xl mx-auto flex justify-between items-center gap-2">
           <div className="flex items-center gap-2">
-            <div className="p-2 bg-cyan-500/10 border border-cyan-500/30 rounded-xl text-cyan-400">
-              <ShieldAlert size={20} />
+            <button 
+              onClick={() => setShowNavMenu(!showNavMenu)}
+              className="p-2 bg-slate-800/80 hover:bg-slate-700 border border-slate-700/50 rounded-xl text-cyan-400 transition"
+              title="Menu do Ecossistema"
+            >
+              <LayoutGrid size={18} />
+            </button>
+            <div className="flex items-center gap-2">
+              <div className="p-1.5 bg-cyan-500/10 border border-cyan-500/30 rounded-xl text-cyan-400">
+                <ShieldAlert size={18} />
+              </div>
+              <span className="font-black tracking-wider text-xs sm:text-sm bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                LEGALESE
+              </span>
             </div>
-            <span className="font-black tracking-wider text-sm sm:text-base bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              LEGALESETRANSLATOR
-            </span>
           </div>
           
           <div className="flex items-center gap-2">
@@ -103,13 +113,45 @@ export default function App() {
         </div>
       </header>
 
-      {/* PAINEL DE HISTÓRICO EXPANSÍVEL */}
-      {showHistory && (
-        <div className="max-w-xl mx-auto px-4 mt-3">
+      {/* MENU DE ROTAS RÁPIDAS DA FORJA DIGITAL */}
+      {showNavMenu && (
+        <div className="max-w-xl mx-auto px-4 mt-2">
           <div className="bg-slate-900 border border-slate-800 p-4 rounded-2xl shadow-2xl animate-fade-in">
             <div className="flex justify-between items-center mb-3">
               <h3 className="text-xs font-bold text-cyan-400 flex items-center gap-1.5 uppercase tracking-wider">
-                <History size={14} /> Análises Anteriores (Salvas no Dispositivo)
+                <Layers size={14} /> ECOSSISTEMA FORJA DIGITAL
+              </h3>
+              <button onClick={() => setShowNavMenu(false)} className="text-slate-400 hover:text-slate-200 text-xs font-bold">✕ Fechar</button>
+            </div>
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <a 
+                href="https://catalogo-apps.vercel.app" 
+                target="_blank" 
+                rel="noreferrer"
+                className="p-2.5 bg-slate-950 border border-slate-800 hover:border-cyan-500/50 rounded-xl text-slate-300 font-medium flex items-center justify-between transition"
+              >
+                <span>Catálogo Principal</span>
+                <ExternalLink size={12} className="text-cyan-400" />
+              </a>
+              <a 
+                href="#" 
+                className="p-2.5 bg-cyan-500/10 border border-cyan-500/30 rounded-xl text-cyan-300 font-bold flex items-center justify-between"
+              >
+                <span>Legalese AI</span>
+                <span className="text-[10px] bg-cyan-500 text-slate-950 font-black px-1.5 py-0.5 rounded">Ativo</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* PAINEL DE HISTÓRICO EXPANSÍVEL */}
+      {showHistory && (
+        <div className="max-w-xl mx-auto px-4 mt-2">
+          <div className="bg-slate-900 border border-slate-800 p-4 rounded-2xl shadow-2xl animate-fade-in">
+            <div className="flex justify-between items-center mb-3">
+              <h3 className="text-xs font-bold text-cyan-400 flex items-center gap-1.5 uppercase tracking-wider">
+                <History size={14} /> Análises Anteriores
               </h3>
               <button onClick={() => setShowHistory(false)} className="text-slate-400 hover:text-slate-200 text-xs font-bold">✕ Fechar</button>
             </div>
@@ -161,7 +203,7 @@ export default function App() {
           </button>
         </div>
 
-        {/* CAIXA DE TEXTO / INPUT CARD */}
+        {/* CAIXA DE TEXTO */}
         <div className="bg-slate-900/60 border border-slate-800/90 rounded-3xl p-4 sm:p-5 shadow-2xl backdrop-blur-xl mb-6">
           <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">
             Cole o texto do contrato ou termos de uso aqui:
@@ -221,7 +263,7 @@ export default function App() {
           </div>
         )}
 
-        {/* RODAPÉ DO ECOSSISTEMA FORJA DIGITAL */}
+        {/* RODAPÉ DO ECOSSISTEMA */}
         <div className="mt-10 border-t border-slate-900 pt-6 text-center">
           <div className="flex items-center justify-center gap-1.5 text-xs text-slate-500 mb-2 font-semibold">
             <Layers size={14} /> ECOSSISTEMA FORJA DIGITAL
