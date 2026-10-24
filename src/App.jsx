@@ -167,7 +167,7 @@ export default function App() {
                 </div>
 
                 <a 
-                  href="https://link.mercadopago.com.br/suachavepix" 
+                  href="https://mpago.la/1Gc1o3z" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="block w-full py-4 bg-gradient-to-r from-cyan-500 to-teal-400 hover:from-cyan-400 hover:to-teal-300 text-slate-950 font-black text-xs uppercase rounded-2xl text-center shadow-lg transition flex items-center justify-center gap-2"
